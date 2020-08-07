@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.open.fire</groupId>
+    <artifactId>open-capacity</artifactId>
+    <version>2.0.1</version>
+    <modules>
+        <module>inner-intergration</module>
+        <module>business-module</module>
+    </modules>
+    <name>open-capacity</name>
+    <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <core.version>2.0.1</core.version>
+        <log4j2.version>2.1</log4j2.version>
+        <jasypt.version>1.14</jasypt.version>
+        <hutool.version>4.1.13</hutool.version>
+        <fastjson.version>1.2.60</fastjson.version>
+        <disruptor.version>3.4.1</disruptor.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <docker.host>http://59.110.164.254:5555</docker.host>
+        <docker.image.prefix>yjj</docker.image.prefix>
+        <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
+        <net-devh-grpc.version>2.0.1.RELEASE</net-devh-grpc.version>
+        <spring-platform.version>Cairo-SR3</spring-platform.version>
+        <spring.social.version>1.1.6.RELEASE</spring.social.version>
+        <spring-security.version>5.1.1.RELEASE</spring-security.version>
+        <security-oauth2.version>2.3.4.RELEASE</security-oauth2.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hibernate-validator.verion>5.0.2.Final</hibernate-validator.verion>
+        <flowable.version>6.4.1</flowable.version>
+        <spring-cloud-dependencies.version>Greenwich.SR2</spring-cloud-dependencies.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Micrometer Prometheus registry -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.spring.platform</groupId>
+                <artifactId>platform-bom</artifactId>
+                <version>${spring-platform.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security-oauth2.version}</version>
+            </dependency>
+
+            <!--&lt;!&ndash; 公共实体类模块 &ndash;&gt;
+            <dependency>
+                <groupId>com.open.capacity</groupId>
+                <artifactId>common-spring-boot-starter</artifactId>
+                <version>${core.version}</version>
+            </dependency>
+            &lt;!&ndash; 关系型和非关系型数据库配置 &ndash;&gt;
+            <dependency>
+                <groupId>com.open.capacity</groupId>
+                <artifactId>db-spring-boot-starter</artifactId>
+                <version>${core.version}</version>
+            </dependency>
+            &lt;!&ndash; 非关系型数据库配置 &ndash;&gt;
+            <dependency>
+                <groupId>com.open.capacity</groupId>
+                <artifactId>redis-spring-boot-starter</artifactId>
+                <version>${core.version}</version>
+            </dependency>
+            &lt;!&ndash; 日志配置 &ndash;&gt;
+            <dependency>
+                <groupId>com.open.capacity</groupId>
+                <artifactId>log-spring-boot-starter</artifactId>
+                <version>${core.version}</version>
+            </dependency>
+
+            &lt;!&ndash; 资源服务 &ndash;&gt;
+            <dependency>
+                <groupId>com.open.capacity</groupId>
+                <artifactId>uaa-client-spring-boot-starter</artifactId>
+                <version>${core.version}</version>
+            </dependency>
+
+            &lt;!&ndash; 资源服务 &ndash;&gt;
+            <dependency>
+                <groupId>com.open.capacity</groupId>
+                <artifactId>uaa-server-spring-boot-starter</artifactId>
+                <version>${core.version}</version>
+            </dependency>
+            &lt;!&ndash; API测试文档 &ndash;&gt;
+            <dependency>
+                <groupId>com.open.capacity</groupId>
+                <artifactId>swagger-spring-boot-starter</artifactId>
+                <version>${core.version}</version>
+            </dependency>
+            &lt;!&ndash; 自定义路由策略 &ndash;&gt;
+            <dependency>
+                <groupId>com.open.capacity</groupId>
+                <artifactId>ribbon-spring-boot-starter</artifactId>
+                <version>${core.version}</version>
+            </dependency>
+
+-->
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
